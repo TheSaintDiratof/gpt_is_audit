@@ -44,11 +44,11 @@ models = { 'gpt_35_long': g4f.models.gpt_35_long,
            'pi': g4f.models.pi
           }
 
-def ask_gpt(intro="There is a piece of code Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\"", 
+def ask_gpt(intro="There is a piece of code. Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\"", 
             code="", 
-            additional_question="",
+            addition="",
             model=g4f.models.gpt_35_long):
-    content = intro + '\n' + code + '\n' + additional_question
+    content = intro  + '\n' + code + '\n' + addition
     content = content.strip()
     response = g4f.ChatCompletion.create(
         model=model,
@@ -70,18 +70,18 @@ def get_models():
         i += 1
     return string
 
-def main(args):
-    intro = "There is a piece of code Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\""
-    additional_question = ""
+def main(args=sys.argv):
+    intro = "There is a piece of code. Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\""
+    addition = ""
     model = g4f.models.gpt_35_long
     i = 1
     while i < (len(args) - 1):
         if "-l" in args:
             print(get_models())
             sys.exit(0)
-        if args[i] == "-q" or args[i] == "--additional_question":
+        if args[i] == "-a" or args[i] == "--addition":
             i += 1
-            additional_question = args[i]
+            addition = args[i]
         if args[i] == "-i" or args[i] == "--intro":
             i += 1
             intro = args[i]
@@ -100,7 +100,7 @@ def main(args):
         except UnboundLocalError:
             code = line
 
-    answer = ask_gpt(intro, code, additional_question, model)
+    answer = ask_gpt(intro, code, addition, model)
     print(answer)
 
 if __name__ == '__main__':

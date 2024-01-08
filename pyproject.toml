@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "gpt_is"
+version = "0.0.1"
+authors = [
+  { name="Diratof Azdimarlow", email="" },
+]
+description = "A small script that uses g4f module for answering from CLI"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = ["g4f"]
+
+[project.urls]
+Homepage = "https://github.com/TheSaintDiratof/gpt_is"
+Issues = "https://github.com/TheSaintDiratof/gpt_is"
