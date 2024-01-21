@@ -47,12 +47,12 @@ models = { 'gpt_35_long': g4f.models.gpt_35_long,
 def ask_gpt(intro="There is a piece of code. Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\"", 
             code="", 
             addition="",
+            role="user"
             model=g4f.models.gpt_35_long):
     content = intro  + '\n' + code + '\n' + addition
-    content = content.strip()
     response = g4f.ChatCompletion.create(
         model=model,
-        messages=[{"role": "user", "content": content}],
+        messages=[{"role": role, "content": content}],
     )
     return response
 
@@ -73,10 +73,11 @@ def get_models():
 def main(args=sys.argv):
     intro = "There is a piece of code. Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\""
     addition = ""
+    role = "user"
     model = g4f.models.gpt_35_long
     i = 1
     while i < (len(args) - 1):
-        if "-l" in args:
+        if "-l" or "--list-models" in args:
             print(get_models())
             sys.exit(0)
         if args[i] == "-a" or args[i] == "--addition":
@@ -85,6 +86,9 @@ def main(args=sys.argv):
         if args[i] == "-i" or args[i] == "--intro":
             i += 1
             intro = args[i]
+        if args[i] == "-r" or args[i] == "--role":
+            i += 1
+            role = args[i]
         if args[i] == "-m" or args[i] == "--model":
             i += 1
             try:
@@ -100,7 +104,7 @@ def main(args=sys.argv):
         except UnboundLocalError:
             code = line
 
-    answer = ask_gpt(intro, code, addition, model)
+    answer = ask_gpt(intro, code, addition, role, user, model)
     print(answer)
 
 if __name__ == '__main__':

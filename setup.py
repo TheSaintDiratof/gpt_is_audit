@@ -17,7 +17,7 @@ setup(
     name='g4f',
     version=VERSION,
     author='TheSaintDiratof',
-    author_email='',
+    author_email='oeuoeui@tndh.hp',
     description=DESCRIPTION,
     packages=find_packages(),
     entry_points={
