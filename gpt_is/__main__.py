@@ -44,12 +44,12 @@ models = { 'gpt_35_long': g4f.models.gpt_35_long,
            'pi': g4f.models.pi
           }
 
-def ask_gpt(intro="There is a piece of code. Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\"", 
+def ask_gpt(prefix="There is a piece of code. Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\"", 
             code="", 
             addition="",
             role="user",
             model=g4f.models.gpt_35_long):
-    content = intro  + '\n' + code + '\n' + addition
+    content = prefix  + '\n' + code + '\n' + addition
     response = g4f.ChatCompletion.create(
         model=model,
         messages=[{"role": role, "content": content}],
@@ -71,7 +71,7 @@ def get_models():
     return string
 
 def main(args=sys.argv):
-    intro = "There is a piece of code. Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\""
+    prefix = "There is a piece of code. Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\""
     addition = ""
     role = "user"
     model = g4f.models.gpt_35_long
@@ -83,9 +83,9 @@ def main(args=sys.argv):
         if args[i] == "-a" or args[i] == "--addition":
             i += 1
             addition = args[i]
-        if args[i] == "-i" or args[i] == "--intro":
+        if args[i] == "-p" or args[i] == "--prefix":
             i += 1
-            intro = args[i]
+            prefix = args[i]
         if args[i] == "-r" or args[i] == "--role":
             i += 1
             role = args[i]
@@ -104,7 +104,7 @@ def main(args=sys.argv):
         except UnboundLocalError:
             code = line
 
-    answer = ask_gpt(intro, code, addition, role, user, model)
+    answer = ask_gpt(prefix, code, addition, role, user, model)
     print(answer)
 
 if __name__ == '__main__':
