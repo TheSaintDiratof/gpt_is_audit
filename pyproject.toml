@@ -2,12 +2,12 @@
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 [project]
-name = "gpt_is"
-version = "0.0.1"
+name = "llm_audit"
+version = "0.0.2"
 authors = [
   { name="Diratof Azdimarlow", email="ouoeio@eui.pu" },
 ]
-description = "A small script that uses g4f module for answering from CLI"
+description = "A small script that uses g4f module for audit code from CLI"
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
@@ -18,5 +18,5 @@ classifiers = [
 dependencies = ["g4f"]
 
 [project.urls]
-Homepage = "https://github.com/TheSaintDiratof/gpt_is"
-Issues = "https://github.com/TheSaintDiratof/gpt_is"
+Homepage = "https://github.com/TheSaintDiratof/llm_audit"
+Issues = "https://github.com/TheSaintDiratof/llm_audit"

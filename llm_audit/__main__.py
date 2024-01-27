@@ -74,6 +74,7 @@ def main(args=sys.argv):
     prefix = "There is a piece of code. Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\""
     addition = ""
     role = "user"
+    code = ""
     model = g4f.models.gpt_35_long
     i = 1
     while i < (len(args) - 1):
@@ -89,6 +90,10 @@ def main(args=sys.argv):
         if args[i] == "-r" or args[i] == "--role":
             i += 1
             role = args[i]
+        if args[i] == "-h" or args[i] == "--help":
+            i += 1
+            print("will be soon")
+            sys.exit(0)
         if args[i] == "-m" or args[i] == "--model":
             i += 1
             try:
@@ -99,12 +104,9 @@ def main(args=sys.argv):
         i += 1
 
     for line in sys.stdin:
-        try:
-            code += line
-        except UnboundLocalError:
-            code = line
+        code += line
 
-    answer = ask_gpt(prefix, code, addition, role, user, model)
+    answer = ask_gpt(prefix, code, addition, role, model)
     print(answer)
 
 if __name__ == '__main__':

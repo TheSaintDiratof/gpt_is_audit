@@ -6,7 +6,7 @@
 }:
 buildPythonPackage rec {
   name = "gpt_is";
-  src = /home/diratof/Documents/gpt_is;
+  src = /home/diratof/Documents/llm_audit;
   nativeBuildInputs = [ 
     pip
     setuptools
