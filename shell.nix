@@ -1,8 +1,8 @@
 { pkgs ? import <nixpkgs> {} }:
 pkgs.mkShell {
   packages = with pkgs; let 
-    g4f = python3Packages.callPackage ./g4f-nix/default.nix {};
-    llm_audit = python3Packages.callPackage ./default.nix {g4f = g4f;};
+    g4f = python3Packages.callPackage ./llm_audit.pkgs/g4f-nix/default.nix {};
+    llm_audit = python3Packages.callPackage ./llm_audit.pkgs/llm_audit.nix {g4f = g4f;};
   in [
     python3Full
     git
