@@ -44,7 +44,7 @@ models = { 'gpt_35_long': g4f.models.gpt_35_long,
            'pi': g4f.models.pi
           }
 
-def ask_gpt(prefix="There is a piece of code. Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\"", 
+def ask_llm(prefix="There is a piece of code. Show me vulnerabilities in this code. Answer like \"$line_number $what_kind_of_vulnerability $way_to_fix\"", 
             code="", 
             addition="",
             role="user",
@@ -106,7 +106,7 @@ def main(args=sys.argv):
     for line in sys.stdin:
         code += line
 
-    answer = ask_gpt(prefix, code, addition, role, model)
+    answer = ask_llm(prefix, code, addition, role, model)
     print(answer)
 
 if __name__ == '__main__':
