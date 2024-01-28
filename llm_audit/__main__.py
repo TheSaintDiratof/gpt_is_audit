@@ -76,9 +76,9 @@ def main(args=sys.argv):
     role = "user"
     code = ""
     model = g4f.models.gpt_35_long
-    i = 1
+    i = 0
     while i < (len(args) - 1):
-        if "-l" or "--list-models" in args:
+        if args[i] == "-l" or args[i] == "--list-models" in args:
             print(get_models())
             sys.exit(0)
         if args[i] == "-a" or args[i] == "--addition":
