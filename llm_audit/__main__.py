@@ -61,11 +61,11 @@ def get_model(model):
 
 def get_models():
     string = str()
-    i = 1
+    i = 0
     while i < len(list(models.keys())):
         string += list(models.keys())[i]
         string += ' '
-        if not i % 3:
+        if not (i-1) % 3:
             string += '\n'
         i += 1
     return string
@@ -78,7 +78,6 @@ def main(args=sys.argv):
     model = g4f.models.llama2_70b
     i = 0
     while i < len(args):
-        print(args[i])
         if args[i] == "-l" or args[i] == "--list-models" in args:
             print(get_models())
             sys.exit(0)
