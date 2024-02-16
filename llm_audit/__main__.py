@@ -48,7 +48,7 @@ def ask_llm(prefix="There is a piece of code. Show me vulnerabilities in this co
             code="", 
             addition="",
             role="user",
-            model=g4f.models.gpt_35_long):
+            model=g4f.models.llama2_70b):
     content = prefix  + '\n' + code + '\n' + addition
     response = g4f.ChatCompletion.create(
         model=model,
@@ -63,7 +63,7 @@ def get_models():
     string = str()
     i = 1
     while i < len(list(models.keys())):
-        string += list(models.keys())[i-1]
+        string += list(models.keys())[i]
         string += ' '
         if not i % 3:
             string += '\n'
@@ -75,9 +75,10 @@ def main(args=sys.argv):
     addition = ""
     role = "user"
     code = ""
-    model = g4f.models.gpt_35_long
+    model = g4f.models.llama2_70b
     i = 0
-    while i < (len(args) - 1):
+    while i < len(args):
+        print(args[i])
         if args[i] == "-l" or args[i] == "--list-models" in args:
             print(get_models())
             sys.exit(0)
